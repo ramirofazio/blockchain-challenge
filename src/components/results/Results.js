@@ -1,11 +1,12 @@
+import { Box } from '@material-ui/core';
 import React from 'react';
 
 
 function Results() {
     return (
-        <div>
+        <Box sx={{ width: "100%", outline: "1px solid red" }}>
             <p> im results</p>
-        </div>
+        </Box>
     );
 }
 

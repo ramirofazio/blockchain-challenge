@@ -536,24 +536,24 @@ function Metamask() {
 
     if (!isMobile) {
         return (
-            <AppBar position='relative'>
+            <AppBar position='relative' style={{ backgroundColor: "#ff7f00" }}>
                 <Toolbar>
                     <Box sx={{ display: "flex", justifyContent: "space-around", width: "100%" }}>
                         <Link to="/">
                             <HomeIcon fontSize='large'
                                 edge="start"
                                 aria-label="menu"
-                                sx={{ mr: 2, color: "white" }} />
+                                sx={{ mr: 2, color: "#000" }} />
                         </Link>
                         {/* <Typography variant='h6'>
                             Address: {defaultAccount}
                         </Typography> */}
 
-                        <Typography variant='h6'>
+                        <Typography variant='h6' style={{ color: "#000" }}>
                             QUIZ Balance: {userBalance}
                         </Typography>
 
-                        <Typography variant='h6'>
+                        <Typography variant='h6' style={{ color: "#000" }}>
                             Network: {userNetwork}
                         </Typography>
                         <Button variant="outlined" onClick={() => connectWalletHandler()}>{connButtonText}</Button>
@@ -564,7 +564,7 @@ function Metamask() {
 
         return (
             <Box sx={{ width: "100%" }}>
-                <AppBar position="static">
+                <AppBar position="static" style={{ backgroundColor: "#ff7f00" }}>
                     <Toolbar>
                         <Box sx={{ display: "flex", width: "100%", justifyContent: "space-between" }}>
                             <Link to='/'>
@@ -572,7 +572,7 @@ function Metamask() {
                                     fontSize="large"
                                     edge="start"
                                     aria-label="menu"
-                                    sx={{ mr: 2, color: "white" }}
+                                    sx={{ mr: 2, color: "#000" }}
                                 />
                             </Link>
                             <Button variant="outlined">Your Account</Button>
