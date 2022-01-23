@@ -3,6 +3,8 @@ import { ethers } from 'ethers';
 import { useMediaQuery, useTheme, AppBar, Typography, Toolbar, Button, Box } from '@material-ui/core'
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import HomeIcon from '@mui/icons-material/Home';
+import { Link } from 'react-router-dom';
 
 
 function Metamask() {
@@ -537,9 +539,15 @@ function Metamask() {
             <AppBar position='relative'>
                 <Toolbar>
                     <Box sx={{ display: "flex", justifyContent: "space-around", width: "100%" }}>
-                        <Typography variant='h6'>
+                        <Link to="/">
+                            <HomeIcon fontSize='large'
+                                edge="start"
+                                aria-label="menu"
+                                sx={{ mr: 2, color: "white" }} />
+                        </Link>
+                        {/* <Typography variant='h6'>
                             Address: {defaultAccount}
-                        </Typography>
+                        </Typography> */}
 
                         <Typography variant='h6'>
                             QUIZ Balance: {userBalance}
@@ -555,25 +563,24 @@ function Metamask() {
     } else {
 
         return (
-            <Box sx={{ width: "100%"}}>
+            <Box sx={{ width: "100%" }}>
                 <AppBar position="static">
                     <Toolbar>
                         <Box sx={{ display: "flex", width: "100%", justifyContent: "space-between" }}>
-                            <IconButton
-                                size="large"
-                                edge="start"
-                                color="inherit"
-                                aria-label="menu"
-                                sx={{ mr: 2 }}
-                            >
-                                <MenuIcon />
-                            </IconButton>
+                            <Link to='/'>
+                                <HomeIcon
+                                    fontSize="large"
+                                    edge="start"
+                                    aria-label="menu"
+                                    sx={{ mr: 2, color: "white" }}
+                                />
+                            </Link>
                             <Button variant="outlined">Your Account</Button>
                             <Button variant="outlined" onClick={() => connectWalletHandler()}>{connButtonText}</Button>
                         </Box>
                     </Toolbar>
                 </AppBar>
-            </Box>
+            </Box >
         );
 
     }
