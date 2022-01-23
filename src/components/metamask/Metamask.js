@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
-import styles from './Metamask.module.css'
-import { ethers } from 'ethers'
+import React, { useEffect, useState } from 'react';
+import { ethers } from 'ethers';
+import { useMediaQuery, useTheme, AppBar, Typography, Toolbar, Button, Box } from '@material-ui/core'
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
 
 
 function Metamask() {
@@ -11,6 +13,8 @@ function Metamask() {
     const [userBalance, setUserBalance] = useState(null);
     const [connButtonText, setConnButtonText] = useState('Connect Wallet');
     const [userNetwork, setUserNetwork] = useState(null)
+
+    if (errorMessage !== null) console.log("errorMsj Metamask 18", errorMessage)
 
     const connectWalletHandler = () => {
         if (window.ethereum && window.ethereum.isMetaMask) {
@@ -524,24 +528,59 @@ function Metamask() {
 
     window.ethereum.on('chainChanged', chainChangedHandler);
 
-    return (
-        <div className={styles.container}>
-            <div>
-                <h3 className={styles.h3}>Address: {defaultAccount}</h3>
-            </div>
-            <div>
-                <h3 className={styles.h3}>QUIZ Balance: {userBalance}</h3>
-            </div>
-            <div>
-                <h3 className={styles.h3}>Network: {userNetwork}</h3>
-            </div>
-            <div>
-                <button onClick={connectWalletHandler} className={styles.connectBtn}>{connButtonText}</button>
-            </div>
 
-            {errorMessage}
-        </div>
-    );
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
+    if (!isMobile) {
+        return (
+            <AppBar position='relative'>
+                <Toolbar>
+                    <Box sx={{ display: "flex", justifyContent: "space-around", width: "100%" }}>
+                        <Typography variant='h6'>
+                            Address: {defaultAccount}
+                        </Typography>
+
+                        <Typography variant='h6'>
+                            QUIZ Balance: {userBalance}
+                        </Typography>
+
+                        <Typography variant='h6'>
+                            Network: {userNetwork}
+                        </Typography>
+                        <Button variant="outlined" onClick={() => connectWalletHandler()}>{connButtonText}</Button>
+                    </Box>
+                </Toolbar>
+            </AppBar>)
+    } else {
+
+        return (
+            <Box sx={{ width: "100%"}}>
+                <AppBar position="static">
+                    <Toolbar>
+                        <Box sx={{ display: "flex", width: "100%", justifyContent: "space-between" }}>
+                            <IconButton
+                                size="large"
+                                edge="start"
+                                color="inherit"
+                                aria-label="menu"
+                                sx={{ mr: 2 }}
+                            >
+                                <MenuIcon />
+                            </IconButton>
+                            <Button variant="outlined">Your Account</Button>
+                            <Button variant="outlined" onClick={() => connectWalletHandler()}>{connButtonText}</Button>
+                        </Box>
+                    </Toolbar>
+                </AppBar>
+            </Box>
+        );
+
+    }
+
+
+
+
 }
 
 export default Metamask;

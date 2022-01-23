@@ -1,19 +1,21 @@
 import React, { useState } from 'react';
-import styles from './Survey.module.css'
-import surveyjson from './survey-sample.json'
+import surveyjson from '../survey-sample.json'
 import Trivia from '../trivia/Trivia.js'
+import { Box, Button } from '@material-ui/core';
 
 function Survey() {
 
     const [start, setStart] = useState(false)
 
     return (
-        <div className={styles.container}>
+        <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
             <h1>{surveyjson.title}</h1>
-            <img src={surveyjson.image} className={styles.img} />
-            <button onClick={() => setStart(!start)} className={styles.startTriviaBtn}>Start!</button>
+            <img src={surveyjson.image} width="25%" />
+            <Button
+                variant='outlined'
+                onClick={() => setStart(!start)} >Start!</Button>
             {start ? <Trivia /> : null}
-        </div>
+        </Box>
     );
 }
 

@@ -1,12 +1,11 @@
 import React from 'react';
-import styles from './Home.module.css';
-import Metamask from '../metamask/Metamask.js';
 import Survey from '../survey/Survey.js';
+import NavBar from '../navBar/NavBar';
 
 function Home() {
     return (
-        <div className={styles.container}>
-            <Metamask />
+        <div>
+            <NavBar />
             <Survey />
         </div>
     );
