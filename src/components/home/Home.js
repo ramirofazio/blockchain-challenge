@@ -1,11 +1,14 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+
+import arrow from '../../assets/arrow.png';
+
 import Survey from '../survey/Survey.js';
 import { Box } from '@material-ui/core';
-import arrow from '../../assets/arrow.png'
-import { useSelector } from 'react-redux';
 
 function Home() {
 
+    
     const walletHomeText = useSelector((state) => state.walletHomeText)
 
     return (

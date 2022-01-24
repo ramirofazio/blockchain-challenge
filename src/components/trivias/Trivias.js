@@ -1,30 +1,61 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom"
 
-import { Box, FormControlLabel, Checkbox, Button } from '@material-ui/core';
+import { Box, Button } from '@material-ui/core';
 import surveyjson from '../survey-sample.json';
-import { height } from '@mui/system';
+import { useDispatch } from 'react-redux';
+import { triviaFinished } from '../../redux/actions/index.js';
 
 
 function Trivias() {
-
-    const [counter, setCounter] = useState(0);
+    const dispatch = useDispatch()
 
     const trivias = surveyjson.questions
 
-    if (counter === trivias.length) return (
-        <Box sx={{
-            display: "flex",
-            width: "100vw",
-            height: "90vh",
-            justifyContent: "center",
-            alignItems: "center"
-        }}>
-            <Link to='/results' style={{ textDecoration: "none" }}>
-                <Button style={{ width: "20vw", height: "15vh", fontSize: "2rem", color: "#000", border: "2px solid #000", borderRadius: "5rem" }}>See Results</Button>
-            </Link>
-        </Box>
-    )
+    const [counter, setCounter] = useState(0);
+    const [results, setRestults] = useState({
+        0: null,
+        1: null,
+        2: null
+    })
+
+    const handleOnChange = (opt) => {
+        if (counter === 0) {
+            setRestults({
+                ...results,
+                0: opt,
+            })
+        } else if (counter === 1) {
+            setRestults({
+                ...results,
+                1: opt,
+            })
+        } else if (counter === 2) {
+            setRestults({
+                ...results,
+                2: opt,
+            })
+        }
+    }
+
+    if (counter === trivias.length) {
+        const newResults = [results]
+        dispatch(triviaFinished(newResults))
+
+        return (
+            <Box sx={{
+                display: "flex",
+                width: "100vw",
+                height: "90vh",
+                justifyContent: "center",
+                alignItems: "center"
+            }}>
+                <Link to='/results' style={{ textDecoration: "none" }}>
+                    <Button style={{ width: "20vw", height: "15vh", fontSize: "2rem", color: "#000", border: "2px solid #000", borderRadius: "5rem" }}>See Results</Button>
+                </Link>
+            </Box>
+        )
+    }
 
     return (
         <Box sx={{
@@ -36,6 +67,7 @@ function Trivias() {
             justifyContent: "center",
 
         }}>
+
             <Box sx={{
                 backgroundColor: "#ffffff40",
                 borderRadius: "3rem",
@@ -47,7 +79,6 @@ function Trivias() {
                 height: "50vh",
                 padding: "2.5rem",
 
-                outline: "1px solid red"
 
             }}>
 
@@ -58,37 +89,47 @@ function Trivias() {
                     display: "flex",
                     width: "100%",
                     justifyContent: "space-around",
+                    alignItems: "center",
+                    marginTop: "3rem",
 
-                    outline: "1px solid blue"
                 }}>
                     <img src={trivias[counter].image} alt='' width="250vw" height="250vw" style={{
                         display: "flex",
                         borderRadius: "2rem",
                         objectFit: "cover",
-                        marginBottom: "1.5rem",
-                        justifyContent: "space-around"
                     }} />
-                    <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                    <Box sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        marginTop: "-1rem"
+                    }}>
                         {
                             trivias[counter].options.map((opt, index) => {
                                 return (
-                                    <Box key={index} sx={{ marginBottom: "2rem" }} >
-                                        <FormControlLabel
-                                            control={
-                                                <Checkbox />
-                                            }
-                                            label={opt.text}
-                                        />
-                                    </Box>
+                                    <Button
+                                        key={index}
+                                        style={{
+                                            border: "1px solid #000",
+                                            marginTop: "1rem"
+                                        }}
+                                        onClick={() => handleOnChange(opt.text)}
+                                    >
+                                        {opt.text}
+                                    </Button>
+
                                 )
                             })}
                     </Box>
                 </Box>
             </Box>
-            {setTimeout(() => {
-                setCounter(counter + 1)
-            }, trivias[counter].lifetimeSeconds * 1000)}
-        </Box>
+            {
+                setTimeout(() => {
+                    setCounter(counter + 1)
+
+                }, trivias[counter].lifetimeSeconds * 1000)
+            }
+        </Box >
     );
 }
 

@@ -1,9 +1,14 @@
 import React from 'react';
-import surveyjson from '../survey-sample.json'
-import { Box, Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
+import { Box, Button } from '@material-ui/core';
+
+import surveyjson from '../survey-sample.json'
 
 function Survey() {
+
+    const walletHomeText = useSelector((state) => state.walletHomeText)
 
     return (
         <Box sx={{
@@ -24,9 +29,15 @@ function Survey() {
 
                 <h1 style={{ fontSize: "5vh", textAlign: "center" }}>{surveyjson.title}</h1>
                 <img src={surveyjson.image} width="200vw" style={{ marginBottom: "2rem" }} />
-                <Link to="/trivia" style={{ textDecoration: "none" }}>
-                    <Button style={{ width: "10rem", border: "2px solid #000", borderRadius: "2rem" }}>Start!</Button>
-                </Link>
+
+                {walletHomeText === "Wallet Conexion Successfully"
+                    ?
+                    <Link to="/trivia" style={{ textDecoration: "none" }}>
+                        <Button style={{ width: "10rem", border: "2px solid #000", borderRadius: "2rem", fontSize: "1.5rem" }}>Start!</Button>
+                    </Link>
+                    :
+                    null}
+
             </Box>
         </Box>
     );

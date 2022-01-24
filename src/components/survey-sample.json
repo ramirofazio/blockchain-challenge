@@ -40,13 +40,13 @@
         "lifetimeSeconds":7,
         "options":[
             {
-               "text":"Opt1"
+               "text":"Opt 1"
             },
             {
-               "text":"Opt2"
+               "text":"Opt 2"
             },
             {
-               "text":"Opt3"
+               "text":"Opt 3"
             }
          ]
      }
