@@ -23,9 +23,9 @@ function Survey() {
             }}>
 
                 <h1 style={{ fontSize: "5vh", textAlign: "center" }}>{surveyjson.title}</h1>
-                <img src={surveyjson.image} width="200vw" />
+                <img src={surveyjson.image} width="200vw" style={{ marginBottom: "2rem" }} />
                 <Link to="/trivia" style={{ textDecoration: "none" }}>
-                    <Button variant='outlined'>Start!</Button>
+                    <Button style={{ width: "10rem", border: "2px solid #000", borderRadius: "2rem" }}>Start!</Button>
                 </Link>
             </Box>
         </Box>

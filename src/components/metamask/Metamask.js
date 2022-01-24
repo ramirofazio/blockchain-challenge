@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { ethers } from 'ethers';
 import { useMediaQuery, useTheme, AppBar, Typography, Toolbar, Button, Box } from '@material-ui/core'
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
 import HomeIcon from '@mui/icons-material/Home';
 import { Link } from 'react-router-dom';
+import metamaskLogo from '../../assets/metamask-logo.png';
+import { useDispatch } from 'react-redux';
+import { walletHomeText } from '../../redux/actions/index';
 
 
 function Metamask() {
-
+    const dispatch = useDispatch()
 
     const [defaultAccount, setDefaultAccount] = useState(null);
     const [errorMessage, setErrorMessage] = useState(null);
@@ -22,6 +23,7 @@ function Metamask() {
         if (window.ethereum && window.ethereum.isMetaMask) {
             //console.log('MetaMask Here!');
             getUserNetwork()
+            dispatch(walletHomeText("Wallet Conexion Successfully"))
 
             window.ethereum.request({ method: 'eth_requestAccounts' })
                 .then(result => {
@@ -527,7 +529,6 @@ function Metamask() {
 
     // listen for account changes
     window.ethereum.on('accountsChanged', accountChangedHandler);
-
     window.ethereum.on('chainChanged', chainChangedHandler);
 
 
@@ -538,28 +539,38 @@ function Metamask() {
         return (
             <AppBar position='relative' style={{ backgroundColor: "#ff7f00" }}>
                 <Toolbar>
-                    <Box sx={{ display: "flex", justifyContent: "space-around", width: "100%" }}>
+                    <Box sx={{ display: "flex", justifyContent: "space-around", width: "100%", alignItems: "center" }}>
                         <Link to="/">
                             <HomeIcon fontSize='large'
                                 edge="start"
                                 aria-label="menu"
-                                sx={{ mr: 2, color: "#000" }} />
+                                sx={{ mr: 2, color: "#FDF1D6" }} />
                         </Link>
                         {/* <Typography variant='h6'>
                             Address: {defaultAccount}
                         </Typography> */}
-
-                        <Typography variant='h6' style={{ color: "#000" }}>
-                            QUIZ Balance: {userBalance}
-                        </Typography>
-
-                        <Typography variant='h6' style={{ color: "#000" }}>
-                            Network: {userNetwork}
-                        </Typography>
-                        <Button variant="outlined" onClick={() => connectWalletHandler()}>{connButtonText}</Button>
+                        <Box sx={{ display: "flex" }}>
+                            <Typography variant='h6' style={{ color: "#FDF1D6", marginRight: "1rem" }}>
+                                QUIZ Balance:
+                            </Typography>
+                            <Typography variant='h6' style={{ color: "#000" }}>
+                                {userBalance}
+                            </Typography>
+                        </Box>
+                        <Box sx={{ display: "flex" }}>
+                            <Typography variant='h6' style={{ color: "#FDF1D6", marginRight: "1rem" }}>
+                                Network:
+                            </Typography>
+                            <Typography variant='h6' style={{ color: "#000" }}>
+                                {userNetwork}
+                            </Typography>
+                        </Box>
+                        <Button onClick={() => connectWalletHandler()} style={{ color: "#FDF1D6" }}>
+                            <img src={metamaskLogo} alt="" width="35rem" />
+                        </Button>
                     </Box>
                 </Toolbar>
-            </AppBar>)
+            </AppBar >)
     } else {
 
         return (

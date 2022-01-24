@@ -21,7 +21,7 @@ function Trivias() {
             alignItems: "center"
         }}>
             <Link to='/results' style={{ textDecoration: "none" }}>
-                <Button variant='outlined' style={{ width: "20vw", height: "15vh", fontSize: "2rem" }}>See Results</Button>
+                <Button style={{ width: "20vw", height: "15vh", fontSize: "2rem", color: "#000", border: "2px solid #000", borderRadius: "5rem" }}>See Results</Button>
             </Link>
         </Box>
     )
@@ -33,7 +33,8 @@ function Trivias() {
             alignItems: "center",
             height: "90vh",
             width: "100vw",
-            justifyContent: "center"
+            justifyContent: "center",
+
         }}>
             <Box sx={{
                 backgroundColor: "#ffffff40",
@@ -43,32 +44,45 @@ function Trivias() {
                 flexDirection: "column",
                 alignItems: "center",
                 width: "50vw",
-                height: "50vh"
+                height: "50vh",
+                padding: "2.5rem",
+
+                outline: "1px solid red"
+
             }}>
 
                 <h2 style={{ fontSize: "5vh", textAlign: "center" }}>
                     {trivias[counter].text}
                 </h2>
-                <img src={trivias[counter].image} alt='' width="250vw" height="250vw" style={{
-                    borderRadius: "2rem",
-                    objectFit: "cover",
-                    marginBottom: "1.5rem"
-                }} />
                 <Box sx={{
-                    display: "flex"
+                    display: "flex",
+                    width: "100%",
+                    justifyContent: "space-around",
+
+                    outline: "1px solid blue"
                 }}>
-                    {
-                        trivias[counter].options.map((opt, index) => {
-                            return (
-                                <FormControlLabel
-                                    key={index}
-                                    control={
-                                        <Checkbox />
-                                    }
-                                    label={opt.text}
-                                />
-                            )
-                        })}
+                    <img src={trivias[counter].image} alt='' width="250vw" height="250vw" style={{
+                        display: "flex",
+                        borderRadius: "2rem",
+                        objectFit: "cover",
+                        marginBottom: "1.5rem",
+                        justifyContent: "space-around"
+                    }} />
+                    <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                        {
+                            trivias[counter].options.map((opt, index) => {
+                                return (
+                                    <Box key={index} sx={{ marginBottom: "2rem" }} >
+                                        <FormControlLabel
+                                            control={
+                                                <Checkbox />
+                                            }
+                                            label={opt.text}
+                                        />
+                                    </Box>
+                                )
+                            })}
+                    </Box>
                 </Box>
             </Box>
             {setTimeout(() => {
