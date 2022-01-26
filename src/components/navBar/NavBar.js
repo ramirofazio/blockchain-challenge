@@ -1,14 +1,13 @@
-import React from 'react';
-import Metamask from '../metamask/Metamask.js';
-import { Box } from '@material-ui/core';
+import React from 'react'
+import Metamask from '../metamask/Metamask.js'
+import { Box } from '@material-ui/core'
 
-function NavBar() {
-
-    return (
+function NavBar () {
+  return (
         <Box>
             <Metamask />
         </Box>
-    );
+  )
 }
 
-export default NavBar;
+export default NavBar

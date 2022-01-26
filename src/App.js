@@ -1,12 +1,12 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './components/home/Home.js';
-import NavBar from './components/navBar/NavBar.js';
+import React from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Home from './components/home/Home.js'
+import NavBar from './components/navBar/NavBar.js'
 import Trivias from './components/trivias/Trivias.js'
-import Results from './components/results/Results.js';
-import { Box } from '@material-ui/core';
+import Results from './components/results/Results.js'
+import { Box } from '@material-ui/core'
 
-function App() {
+function App () {
   return (
     <Router>
       <NavBar />
@@ -18,7 +18,7 @@ function App() {
         </Routes>
       </Box>
     </Router>
-  );
+  )
 }
 
-export default App;
+export default App
