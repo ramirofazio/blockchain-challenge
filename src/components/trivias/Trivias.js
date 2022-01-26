@@ -1,13 +1,166 @@
 import React, { useState } from 'react';
-import { Link } from "react-router-dom"
-
-import { Box, Button, useTheme, useMediaQuery } from '@material-ui/core';
-import surveyjson from '../survey-sample.json';
 import { useDispatch } from 'react-redux';
+import { Link } from "react-router-dom"
 import { triviaFinished } from '../../redux/actions/index.js';
+import { Box, Button, useTheme, useMediaQuery, makeStyles } from '@material-ui/core';
+
+import surveyjson from '../survey-sample.json';
+
+const useStyle = makeStyles((theme) => ({
+    container: {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        height: "90vh",
+        width: "100vw",
+        justifyContent: "center",
+    },
+    triviaContainer: {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        width: "50vw",
+        height: "50vh",
+
+        backgroundColor: "#ffffff40",
+        borderRadius: "3rem",
+        padding: "2.5rem",
+
+        animation: `$triviaContainer 1500ms ${theme.transitions.easing.easeInOut}`
+    },
+    "@keyframes triviaContainer": {
+        from: {
+            opacity: 0,
+        },
+        to: {
+            opacity: 1,
+        },
+    },
+    imgContainer: {
+        display: "flex",
+        width: "100%",
+        justifyContent: "space-around",
+        alignItems: "center",
+        marginTop: "3rem",
+    },
+    img: {
+        display: "flex",
+        borderRadius: "2rem",
+        objectFit: "cover",
+    },
+    optContainer: {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        marginTop: "-1rem"
+    },
+    mobileContainer: {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        height: "90vh",
+        width: "100vw",
+        justifyContent: "center",
+    },
+    mobileTriviaContainer: {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        width: "60vw",
+        height: "50vh",
+
+        backgroundColor: "#ffffff40",
+        borderRadius: "3rem",
+        padding: "2rem",
+
+        animation: `$mobileTriviaContainer 1500ms ${theme.transitions.easing.easeInOut}`
+    },
+    "@keyframes mobileTriviaContainer": {
+        from: {
+            opacity: 0,
+        },
+        to: {
+            opacity: 1,
+        },
+    },
+    mobileImgContainer: {
+        display: "flex",
+        flexDirection: "column",
+        width: "100%",
+        justifyContent: "space-around",
+        alignItems: "center",
+    },
+    mobileImg: {
+        display: "flex",
+        borderRadius: "2rem",
+        objectFit: "cover",
+    },
+    mobileOptContainer: {
+        display: "flex",
+        alignItems: "center",
+        marginTop: "2rem",
+        marginRight: "-1rem"
+    },
+    resultsBtnContainer: {
+        display: "flex",
+        width: "100vw",
+        height: "90vh",
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    resultsBtn: {
+        width: "40vw",
+        height: "10vh",
+
+        fontSize: "2rem",
+        color: "#000",
+        border: "2px solid #000",
+        borderRadius: "5rem",
+
+        animation: `$resultsBtn 1500ms ${theme.transitions.easing.easeInOut}`
+    },
+    "@keyframes resultsBtn": {
+        from: {
+            opacity: 0,
+        },
+        to: {
+            opacity: 1,
+        },
+    },
+    mobileResultsBtnContainer: {
+        display: "flex",
+        width: "100vw",
+        height: "90vh",
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    mobileResultsBtn: {
+        width: "70vw",
+        height: "10vh",
+
+        fontSize: "2rem",
+        color: "#000",
+        textAlign: "center",
+        border: "2px solid #000",
+        padding: "2rem",
+        borderRadius: "5rem",
+
+        animation: `$mobileResultsBtn 1500ms ${theme.transitions.easing.easeInOut}`
+    },
+    "@keyframes mobileResultsBtn": {
+        from: {
+            opacity: 0,
+        },
+        to: {
+            opacity: 1,
+        },
+    },
+
+}))
 
 
 function Trivias() {
+    const classes = useStyle();
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down("xs"));
 
@@ -49,48 +202,20 @@ function Trivias() {
         if (!isMobile) {
 
             return (
-                <Box sx={{
-                    display: "flex",
-                    width: "100vw",
-                    height: "90vh",
-                    justifyContent: "center",
-                    alignItems: "center"
-                }}>
+                <Box className={classes.resultsBtnContainer}>
                     <Link to='/results' style={{ textDecoration: "none" }}>
-                        <Button style={{
-                            width: "40vw",
-                            height: "10vh",
-                            fontSize: "2rem",
-                            color: "#000",
-                            border: "2px solid #000",
-                            borderRadius: "5rem"
-                        }}>See Results</Button>
+                        <Button className={classes.resultsBtn}>See Results</Button>
                     </Link>
                 </Box>
             )
         } else {
 
             return (
-                <Box sx={{
-                    display: "flex",
-                    width: "100vw",
-                    height: "90vh",
-                    justifyContent: "center",
-                    alignItems: "center"
-                }}>
+                <Box className={classes.mobileResultsBtnContainer}>
                     <Link to='/results' style={{ textDecoration: "none" }}>
-                        <Button style={{
-                            width: "70vw",
-                            height: "10vh",
-                            padding: "2rem",
-                            textAlign: "center",
-                            fontSize: "2rem",
-                            color: "#000",
-                            border: "2px solid #000",
-                            borderRadius: "5rem"
-                        }}>See Results</Button>
+                        <Button className={classes.mobileResultsBtn}>See Results</Button>
                     </Link>
-                </Box>
+                </Box >
             )
         }
     }
@@ -98,52 +223,16 @@ function Trivias() {
     if (!isMobile) {
 
         return (
-            <Box sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                height: "90vh",
-                width: "100vw",
-                justifyContent: "center",
+            <Box className={classes.container}>
 
-            }}>
-
-                <Box sx={{
-                    backgroundColor: "#ffffff40",
-                    borderRadius: "3rem",
-
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    width: "50vw",
-                    height: "50vh",
-                    padding: "2.5rem",
-
-
-                }}>
+                <Box className={classes.triviaContainer}>
 
                     <h2 style={{ fontSize: "5vh", textAlign: "center" }}>
                         {trivias[counter].text}
                     </h2>
-                    <Box sx={{
-                        display: "flex",
-                        width: "100%",
-                        justifyContent: "space-around",
-                        alignItems: "center",
-                        marginTop: "3rem",
-
-                    }}>
-                        <img src={trivias[counter].image} alt='' width="250vw" height="250vw" style={{
-                            display: "flex",
-                            borderRadius: "2rem",
-                            objectFit: "cover",
-                        }} />
-                        <Box sx={{
-                            display: "flex",
-                            flexDirection: "column",
-                            alignItems: "center",
-                            marginTop: "-1rem"
-                        }}>
+                    <Box className={classes.imgContainer}>
+                        <img src={trivias[counter].image} alt='' width="250vw" height="250vw" className={classes.img} />
+                        <Box className={classes.optContainer}>
                             {
                                 trivias[counter].options.map((opt, index) => {
                                     return (
@@ -174,53 +263,16 @@ function Trivias() {
     } else {
 
         return (
-            <Box sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                height: "90vh",
-                width: "100vw",
-                justifyContent: "center",
+            <Box className={classes.mobileContainer}>
 
-            }}>
+                <Box className={classes.mobileTriviaContainer}>
 
-                <Box sx={{
-                    backgroundColor: "#ffffff40",
-                    borderRadius: "3rem",
-
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    width: "60vw",
-                    height: "50vh",
-                    padding: "2rem",
-
-
-                }}>
-
-                    <h2 style={{ fontSize: "2.5rem", textAlign: "center" }}>
+                    <h2 style={{ fontSize: "2rem", textAlign: "center" }}>
                         {trivias[counter].text}
                     </h2>
-                    <Box sx={{
-                        display: "flex",
-                        flexDirection: "column",
-                        width: "100%",
-                        justifyContent: "space-around",
-                        alignItems: "center",
-
-                    }}>
-                        <img src={trivias[counter].image} alt='' width="200vw" height="200vw" style={{
-                            display: "flex",
-                            borderRadius: "2rem",
-                            objectFit: "cover",
-                        }} />
-                        <Box sx={{
-                            display: "flex",
-                            alignItems: "center",
-                            marginTop: "2rem",
-                            marginRight: "-1rem"
-
-                        }}>
+                    <Box className={classes.mobileImgContainer}>
+                        <img src={trivias[counter].image} alt='' width="200vw" height="200vw" className={classes.mobileImg} />
+                        <Box className={classes.mobileOptContainer}>
                             {
                                 trivias[counter].options.map((opt, index) => {
                                     return (

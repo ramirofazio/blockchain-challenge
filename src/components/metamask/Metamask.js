@@ -4,7 +4,15 @@ import { Link } from 'react-router-dom';
 
 import { ethers } from 'ethers';
 
-import { useMediaQuery, useTheme, AppBar, Typography, Toolbar, Button, Box } from '@material-ui/core'
+import {
+    useMediaQuery,
+    useTheme,
+    AppBar,
+    Typography,
+    Toolbar,
+    Button,
+    Box,
+} from '@material-ui/core'
 
 import HomeIcon from '@mui/icons-material/Home';
 import metamaskLogo from '../../assets/metamask-logo.png';
@@ -12,7 +20,11 @@ import metamaskLogo from '../../assets/metamask-logo.png';
 import { walletHomeText } from '../../redux/actions/index';
 import QuizAbi from './QuizAbi.json'
 
+
 function Metamask() {
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down("xs"));
+
     const dispatch = useDispatch()
 
     const [userWallet, setUserWallet] = useState(null);
@@ -41,7 +53,6 @@ function Metamask() {
         }
     }
 
-    // update account, will cause component re-render
     const accountChangedHandler = (newAccount) => {
         setUserWallet(newAccount);
         getAccountBalance(newAccount.toString());
@@ -91,12 +102,9 @@ function Metamask() {
         setUserBalance(formattedBalance);
     }
 
-    // listen for account changes
     window.ethereum.on('accountsChanged', accountChangedHandler);
     window.ethereum.on('chainChanged', chainChangedHandler);
 
-    const theme = useTheme();
-    const isMobile = useMediaQuery(theme.breakpoints.down("xs"));
 
     if (!isMobile) {
         return (
