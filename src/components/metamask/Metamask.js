@@ -96,7 +96,7 @@ function Metamask() {
     window.ethereum.on('chainChanged', chainChangedHandler);
 
     const theme = useTheme();
-    const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+    const isMobile = useMediaQuery(theme.breakpoints.down("xs"));
 
     if (!isMobile) {
         return (
@@ -137,26 +137,55 @@ function Metamask() {
     } else {
 
         return (
-            <Box sx={{ width: "100%" }}>
-                <AppBar position="static" style={{ backgroundColor: "#ff7f00" }}>
-                    <Toolbar>
-                        <Box sx={{ display: "flex", width: "100%", justifyContent: "space-between" }}>
-                            <Link to='/'>
-                                <HomeIcon
-                                    fontSize="large"
-                                    edge="start"
-                                    aria-label="menu"
-                                    sx={{ mr: 2, color: "#000" }}
-                                />
-                            </Link>
-                            <Button variant="outlined">Your Account</Button>
-                            <Button variant="outlined" onClick={() => connectWalletHandler()}>
-                                <img src={metamaskLogo} alt="" width="35rem" />
-                            </Button>
+            <AppBar position='relative' style={{ backgroundColor: "#ff7f00" }}>
+                <Toolbar>
+                    <Box sx={{
+                        display: "flex",
+                        justifyContent: "space-around",
+                        width: "100%",
+                        alignItems: "center"
+                    }}>
+                        <Link to="/">
+                            <HomeIcon fontSize='large'
+                                edge="start"
+                                aria-label="menu"
+                                sx={{ mr: 2, color: "#FDF1D6" }} />
+                        </Link>
+                        {/* <Typography variant='h6'>
+                            Address: {userWallet}
+                        </Typography> */}
+                        <Box sx={{ display: "flex", flexDirection: "column" }}>
+                            <Box sx={{ display: "flex" }}>
+
+                                <Typography variant='h6' style={{
+                                    fontSize: "1rem", color: "#FDF1D6",
+                                    marginRight: "1rem"
+                                }}>
+                                    QUIZ Balance:
+                                </Typography>
+                                <Typography variant='h6' style={{ fontSize: "1rem", color: "#000" }}>
+                                    {userBalance}
+                                </Typography>
+                            </Box>
+                            <Box sx={{ display: "flex" }}>
+
+                                <Typography variant='h6' style={{
+                                    fontSize: "1rem", color: "#FDF1D6",
+                                    marginRight: "1rem"
+                                }}>
+                                    Network:
+                                </Typography>
+                                <Typography variant='h6' style={{ fontSize: "1rem", color: "#000" }}>
+                                    {userNetwork}
+                                </Typography>
+                            </Box>
                         </Box>
-                    </Toolbar>
-                </AppBar>
-            </Box >
+                        <Button onClick={() => connectWalletHandler()} style={{ color: "#FDF1D6" }}>
+                            <img src={metamaskLogo} alt="" width="35rem" />
+                        </Button>
+                    </Box>
+                </Toolbar>
+            </AppBar >
         );
 
     }
