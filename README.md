@@ -1,2 +1,0 @@
-# rather-labs-challenge
-
